@@ -1,153 +1,153 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-body{
-    font-family: system-ui, -apple-system, BlimkMacSystemFont, 'Seoge UI', sans-serif;
-    background: #f4f4f0;
-    min-height: 100vh;
-    display: flex;
-    align-items: center ;
-    padding: 2rem;
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: #f4f4f0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
 }
 
 .wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.25rem;
-    width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  width: 100%;
+  max-width: 420px;
 }
 
 .card {
-    background: #ffffff;
-    border: 0.5px solid rgba(0,0,0,0. 12);
-    border-radius: 16 px;
-    padding: 2rem 1.75rem;
-    width: 100%;
-    max-width: 420px;
+  background: #ffffff;
+  border: 1px solid rgba(0,0,0,0.1);
+  border-radius: 16px;
+  padding: 2rem 1.75rem;
+  width: 100%;
 }
 
 .card-header {
-    display: flex;
-    align-items: flex;
-    align-items: center;
-    gap: 16px;
-    margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 12px;
+  margin-bottom: 1.5rem;
 }
 
-.avatar {
-    width: 88px;
-    height: 88px;
-    border-radius: 50%;
-    object-fit: cover;
-    boder: 1px solid rgba(0,0,0,0.1);
-    background: #e8e8e4;
-    flex-shrink: 0;
-}
-
+.avatar,
 .avatar-placeholder {
-    width: 88px;
-    height: 88px;
-    border-radius: 50%;
-    background: #e8e8e4;
-    flex-shrink: 0;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #e8e8e4;
+  border: 2px solid rgba(0,0,0,0.08);
 }
 
 .header-info {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
 }
 
 .name {
-    font-size: 20px;
-    font-weight: 500;
-    color: #1a1a1a;
-    line-height: 1.2;
+  font-size: 20px;
+  font-weight: 500;
+  color: #1a1a1a;
 }
 
 .badge {
-    display: inline-block;
-    font-size: 11px;
-    font-weight: 500;
-    padding: 3px 12px;
-    border-radius: 999px;
-    width: fit-content;
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 500;
+  padding: 3px 12px;
+  border-radius: 999px;
 }
 
 .badge-male {
-    background: #E6F1FB;
-    color: #0C447C;
+  background: #E6F1FB;
+  color: #0C447C;
 }
 
 .badge-female {
-    background: #FBEAF0;
-    color: #72243E;
+  background: #FBEAF0;
+  color: #72243E;
 }
 
-.filds {
-    display: flex;
-    flex-direction: column;
+.fields {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
 .row {
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    padding: 10ox 0;
-    border-bottom: 0.5px solid rgba(0,0,0,0.08);
-    font-size: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  font-size: 14px;
 }
 
-.row-last-child {
-    border-bottom: none;
+.row:last-child {
+  border-bottom: none;
 }
 
 .label {
-    color: #888;
-    min-width: 68px;
-    flex-shrink: 0;
+  color: #888;
+  flex-shrink: 0;
+  min-width: 60px;
 }
 
 .value {
-    color: #1a1a1a;
-    word-break: break-all;
+  color: #1a1a1a;
+  text-align: right;
+  word-break: break-all;
 }
 
 .reload-btn {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    background: transparent;
-    border: 0.5 solid rgba(0,0,0,0.2);
-    border-radius: 8px;
-    padding: 9px 22px;
-    font-size: 14px;
-    cursor: pointer;
-    color: #1a1a1a;
-    transition: background 0.15s;
-    font-family: inherit;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #1a1a1a;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 24px;
+  font-size: 14px;
+  cursor: pointer;
+  color: #ffffff;
+  font-family: inherit;
+  transition: opacity 0.15s;
+  width: 100%;
+  justify-content: center;
 }
 
-.value {
-    color: #1a1a1a;
-    word-break: break-all;
+.reload-btn:hover {
+  opacity: 0.85;
 }
 
-.reload-btn {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    background: transparent;
-    border-radius: 8px;
-    padding: 9px 22px;
-    font-size: 14px;
-    cursor: pointer;
-    color: #1a1a1a;
-    transition: background 0.15s;
-    font-family: inherit;
+.reload-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
 }
 
+.icon {
+  display: inline-block;
+  font-size: 16px;
+}
+
+.spinning {
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
