@@ -1,35 +1,63 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Presentacion de la prueba Api</title>
-    <link rel="stylesheet" href="styles.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Prueba API</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-    <div class="wrapper">
-        <div class="avatar-placeholder"></div>
-        <div class="hedear-info">
-            <p class="name" id="name">Cargando...</p>
-            <span class="badge" id="gender-badge"></span>
-        </div>
+
+  <div class="container">
+
+    <!-- Barra de búsqueda -->
+    <div id="search-container" class="search-container">
+      <span class="search-icon">🔍</span>
+      <input
+        type="text"
+        id="search-input"
+        class="search-input"
+        placeholder="Buscar por nombre o correo..."
+        oninput="handleSearch(event)"  autocomplete="off"/> <!-- Esta funcion recibe automaticamente el objeto que tiene la informacion sobre los usuarios -->
+
+        <!-- "autocomplete=off"  Es un atributo que le indica al navegador que no debe sugerir automaticamente datos previamente ingeresados-->
+
+      <div id="search-dropdown" class="search-dropdown"></div>
     </div>
 
-    <div class="fields">
+    <!-- Card del usuario -->
+    <div class="card">
+      <div class="wrapper">
+        <div class="avatar-wrap" id="avatar-wrap"></div>
+        <div class="header-info">
+          <p class="name" id="name">Cargando...</p>
+          <span class="badge" id="gender-badge"></span>
+        </div>
+      </div>
+
+      <div class="fields">
         <div class="row">
-            <span class="label">Ciudad</span>
-            <span class="value" id="city"></span>
-            <div class="row">
-                <span class="label">Celular</span>
-                <span class="value" id="phone"></span>
-            </div>
+          <span class="label">Ciudad</span>
+          <span class="value" id="city"></span>
         </div>
+        <div class="row">
+          <span class="label">Correo</span>
+          <span class="value" id="email"></span>
+        </div>
+        <div class="row">
+          <span class="label">Celular</span>
+          <span class="value" id="phone"></span>
+        </div>
+      </div>
+
+      <!-- Botón debajo de los datos -->
+      <button class="reload-btn" id="btn" onclick="loadUser()"> <!-- Es un atributo que practicamente cuando el  usuario presiona y suelta el bton, se dispara la funcion "loadUser()"-->
+        <span class="icon" id="icon">↻</span> Nuevo usuario
+      </button>
     </div>
 
-    <button class="reload-btn" id="btn" onclick="loadUser()">
-        <span class="icon" id="icon">↻</span> Nuevo usuario
-    </button>
+  </div>
 
-    <script src="app.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>
