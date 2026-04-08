@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presentacion de la prueba Api</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+    <div class="wrapper">
+        <div class="avatar-placeholder"></div>
+        <div class="hedear-info">
+            <p class="name" id="name">Cargando...</p>
+            <span class="badge" id="gender-badge"></span>
+        </div>
+    </div>
+
+    <div class="fields">
+        <div class="row">
+            <span class="label">Ciudad</span>
+            <span class="value" id="city"></span>
+            <div class="row">
+                <span class="label">Celular</span>
+                <span class="value" id="phone"></span>
+            </div>
+        </div>
+    </div>
+
+    <button class="reload-btn" id="btn" onclick="loadUser()">
+        <span class="icon" id="icon">↻</span> Nuevo usuario
+    </button>
+
+    <script src="app.js"></script>
+</body>
+</html>
