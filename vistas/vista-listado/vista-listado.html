@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vista Listado</title>
+  <link rel="stylesheet" href="/vistas/vista-listado/styles-listado.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+  
+  <div class="container listado-container">
+
+    <!--Controles de busqueda y cantidad-->
+    <div class="galeria-controls">
+
+      <div id="search-container" class="serch-container">
+        <span class="search-icon">🔍</span>
+        <input
+        type="text"
+        id="search-input"
+        placeholder="Buscar por nombre o correo..."
+        oninput="handleSearchListado(event)"
+        autocomplete="off"/>
+        <div id="search-dropdown" class="search-dropdown"></div>
+      </div>
+
+      <div class="cantidad-wrap">
+        <label for="cantidad-input" class="cantidad-label">Usuarios</label>
+        <input
+        type="number"
+        id="cantidad-input"
+        class="cantidad-input"
+        value="10"
+        min="1"/>
+      </div>
+
+      </div>
+
+
+</body>
+</html>
