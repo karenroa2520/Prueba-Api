@@ -1,48 +1,52 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Vista Listado</title>
-  <link rel="stylesheet" href="/vistas/vista-listado/styles-listado.css">
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="/vistas/vista-listado/styles-listado.css" />
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
-  
+
   <div class="container listado-container">
 
-    <!--Controles de busqueda y cantidad-->
+    <!-- Controles: búsqueda + cantidad -->
     <div class="galeria-controls">
 
-      <div id="search-container" class="serch-container">
+      <div id="search-container" class="search-container">
         <span class="search-icon">🔍</span>
         <input
-        type="text"
-        id="search-input"
-        placeholder="Buscar por nombre o correo..."
-        oninput="handleSearchListado(event)"
-        autocomplete="off"/>
+          type="text"
+          id="search-input"
+          class="search-input"
+          placeholder="Buscar por nombre o correo..."
+          oninput="handleSearchListado(event)"
+          autocomplete="off"
+        />
         <div id="search-dropdown" class="search-dropdown"></div>
       </div>
 
       <div class="cantidad-wrap">
         <label for="cantidad-input" class="cantidad-label">Usuarios</label>
         <input
-        type="number"
-        id="cantidad-input"
-        class="cantidad-input"
-        value="10"
-        min="1"/>
+          type="number"
+          id="cantidad-input"
+          class="cantidad-input"
+          value="10"
+          min="1"
+        />
       </div>
 
-      </div>
+    </div>
 
-      <!-- Tabla listado -->
-       <div class="listado-wrap">
-        <table class="listado-table">
-          <thead>
-            <tr>
-              <th>Foto</th>
+    <!-- Tabla listado -->
+    <div class="listado-wrap">
+      <table class="listado-table">
+        <thead>
+          <tr>
+            <th>Foto</th>
             <th>Nombre</th>
             <th>Género</th>
             <th>Ciudad</th>
