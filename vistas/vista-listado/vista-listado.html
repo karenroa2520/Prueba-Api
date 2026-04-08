@@ -37,6 +37,34 @@
 
       </div>
 
+      <!-- Tabla listado -->
+       <div class="listado-wrap">
+        <table class="listado-table">
+          <thead>
+            <tr>
+              <th>Foto</th>
+            <th>Nombre</th>
+            <th>Género</th>
+            <th>Ciudad</th>
+            <th>Correo</th>
+            <th>Celular</th>
+          </tr>
+        </thead>
+        <tbody id="listado-body">
+          <tr>
+            <td colspan="6" class="listado-empty">Cargando...</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
+    <!-- Botón -->
+    <button class="reload-btn" id="btn-listado" onclick="loadListado()">
+      <span class="icon" id="icon-listado">↻</span> Nuevos usuarios
+    </button>
+
+  </div>
+
+  <script src="/vistas/vista-listado/listados.js"></script>
 </body>
 </html>
