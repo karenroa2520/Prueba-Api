@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vista Cards</title>
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="/vistas/vistas-cards/styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+
+  <div class="container galeria-container">
+
+    <div class="galeria-controls">
+
+      <div id="search-container" class="search-container">
+        <span class="search-icon">🔍</span>
+        <input
+          type="text"
+          id="search-input"
+          class="search-input"
+          placeholder="Buscar por nombre o correo..."
+          oninput="handleSearchGaleria(event)"
+          autocomplete="off"
+        />
+        <div id="search-dropdown" class="search-dropdown"></div>
+      </div>
+
+      <div class="cantidad-wrap">
+        <label for="cantidad-input" class="cantidad-label">Usuarios</label>
+        <input
+          type="number"
+          id="cantidad-input"
+          class="cantidad-input"
+          value="6"
+          min="1"
+        />
+      </div>
+
+    </div>
+
+    <div class="galeria-grid" id="galeria-grid"></div>
+
+    <button class="reload-btn" id="btn-galeria" onclick="loadGaleria()">
+      <span class="icon" id="icon-galeria">↻</span> Nuevos usuarios
+    </button>
+
+  </div>
+
+  <script src="/vistas/vistas-cards/scrip.js"></script>
+</body>
+</html>

@@ -1,0 +1,110 @@
+/* Sobrescribe el max-width del container para la galería */
+.galeria-container {
+  max-width: 1100px;
+}
+
+/* Fila de controles: búsqueda + input de cantidad */
+.galeria-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+
+/* La barra de búsqueda ocupa el espacio disponible */
+.galeria-controls .search-container {
+  flex: 1;
+}
+
+/* Contenedor del input de cantidad */
+.cantidad-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.cantidad-label {
+  font-size: 11px;
+  color: #888;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Input editable — el usuario escribe cuántos quiere */
+.cantidad-input {
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 15px;
+  font-family: inherit;
+  font-weight: 500;
+  background: #fff;
+  color: #1a1a1a;
+  outline: none;
+  transition: border-color 0.2s;
+  text-align: center;
+  width: 70px;
+}
+
+.cantidad-input:focus {
+  border-color: #4a90e2;
+}
+
+/* Grid responsivo de cards */
+.galeria-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 16px;
+  width: 100%;
+}
+
+/* Card individual dentro de la galería */
+.galeria-card {
+  background: #ffffff;
+  border: 1px solid rgba(0,0,0,0.1);
+  border-radius: 20px;
+  padding: 1.5rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.galeria-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 28px rgba(0,0,0,0.12);
+}
+
+.galeria-card .avatar,
+.galeria-card .avatar-placeholder {
+  width: 80px;
+  height: 80px;
+}
+
+.galeria-card .name {
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.galeria-card .fields {
+  width: 100%;
+}
+
+.galeria-card .row {
+  padding: 8px 0;
+  font-size: 13px;
+}
+
+.galeria-card .label {
+  font-size: 12px;
+}
+
+.galeria-card .value {
+  font-size: 13px;
+}
