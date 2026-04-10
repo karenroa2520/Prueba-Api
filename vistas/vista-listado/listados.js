@@ -1,3 +1,6 @@
+// Marca el link activo
+document.getElementById('nav-listado')?.classList.add('activo');
+
 /**
  * usuariosListado
  * Almacena los usuarios cargados en la sesión actual del listado.
@@ -16,7 +19,6 @@ async function loadListado() {
   const tbody    = document.getElementById('listado-body');
   const inputVal = parseInt(document.getElementById('cantidad-input').value);
 
-  // Valida que no supere 200
   if (inputVal > 200) {
     Swal.fire({
       icon: 'error',
@@ -27,7 +29,6 @@ async function loadListado() {
     return;
   }
 
-  // Si el valor es inválido o menor a 1, usa 10 por defecto
   const cantidad = (!inputVal || inputVal < 1) ? 10 : inputVal;
 
   icon.classList.add('spinning');
@@ -52,7 +53,7 @@ async function loadListado() {
 
 /**
  * renderListado
- * Construye y renderiza las filas de la tabla a partir de un array de usuarios.
+ * Construye y renderiza las filas de la tabla.
  * @param {Array} usuarios - Lista de usuarios a renderizar
  */
 function renderListado(usuarios) {
@@ -86,7 +87,6 @@ function renderListado(usuarios) {
 /**
  * handleSearchListado
  * Filtra las filas por nombre o correo sobre el caché actual.
- * No hace nuevas peticiones a la API.
  * @param {Event} event - Evento del input de búsqueda
  */
 function handleSearchListado(event) {
@@ -105,5 +105,5 @@ function handleSearchListado(event) {
   renderListado(filtrados);
 }
 
-// Carga inicial al abrir la página
+// Carga inicial
 loadListado();

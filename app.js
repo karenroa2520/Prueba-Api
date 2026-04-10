@@ -1,6 +1,8 @@
-
 let userHistory = [];
 let currentUser = null;
+
+// Marca el link activo
+document.getElementById('nav-principal')?.classList.add('activo');
 
 async function loadUser() {
   const btn = document.getElementById('btn');
@@ -79,7 +81,7 @@ function handleSearch(e) {
     return;
   }
 
-  dropdown.innerHTML = results.map((u, i) => `
+  dropdown.innerHTML = results.map((u) => `
     <div class="search-item" onclick="selectUser(${userHistory.indexOf(u)})">
       <img src="${u.photo}" alt="${u.fullName}" class="search-avatar" />
       <div class="search-info">
@@ -107,7 +109,6 @@ function clearSearch() {
   }
 }
 
-// Cerrar dropdown al hacer click fuera
 document.addEventListener('click', (e) => {
   const container = document.getElementById('search-container');
   if (container && !container.contains(e.target)) {

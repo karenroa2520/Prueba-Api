@@ -14,7 +14,6 @@ body {
   padding: 2rem;
 }
 
-/* Layout general */
 .container {
   width: 100%;
   max-width: 540px;
@@ -25,7 +24,6 @@ body {
   gap: 16px;
 }
 
-/* Card */
 .card {
   background: #ffffff;
   border: 1px solid rgba(0,0,0,0.1);
@@ -44,7 +42,6 @@ body {
   margin-bottom: 2rem;
 }
 
-/* Avatar */
 .avatar,
 .avatar-placeholder {
   width: 130px;
@@ -61,7 +58,6 @@ body {
   margin-bottom: 8px;
 }
 
-/* Header info */
 .wrapper {
   display: flex;
   flex-direction: column;
@@ -101,7 +97,6 @@ body {
   color: #72243E;
 }
 
-/* Fields */
 .fields {
   display: flex;
   flex-direction: column;
@@ -137,7 +132,6 @@ body {
   font-weight: 500;
 }
 
-/* Botón */
 .reload-btn {
   display: flex;
   align-items: center;
@@ -175,7 +169,6 @@ body {
   animation: spin 0.7s linear infinite;
 }
 
-/* Barra de búsqueda */
 .search-container {
   position: relative;
   display: flex;
@@ -203,7 +196,6 @@ body {
   font-family: inherit;
 }
 
-/* Dropdown */
 .search-dropdown {
   display: none;
   position: absolute;
@@ -252,6 +244,41 @@ body {
   text-align: center;
   color: #aaa;
   font-size: 13px;
+}
+
+/* Navegación entre vistas */
+.nav-vistas {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  padding: 0 0 4px 0;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 18px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  color: #1a1a1a;
+  border: 1px solid rgba(0,0,0,0.15);
+  background: #fff;
+  font-family: inherit;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.nav-link:hover {
+  background: #f0f0ec;
+  border-color: rgba(0,0,0,0.3);
+}
+
+.nav-link.activo {
+  background: #1a1a1a;
+  color: #fff;
+  border-color: #1a1a1a;
 }
 
 @keyframes spin {

@@ -10,7 +10,12 @@
 
   <div class="container">
 
-    <!-- Barra de búsqueda -->
+    <nav class="nav-vistas">
+      <a href="/index.html" class="nav-link" id="nav-principal">👤 Principal</a>
+      <a href="/vistas/vistas-cards/index.html" class="nav-link" id="nav-cards">⊞ Cards</a>
+      <a href="/vistas/vista-listado/vista-listado.html" class="nav-link" id="nav-listado">☰ Listado</a>
+    </nav>
+
     <div id="search-container" class="search-container">
       <span class="search-icon">🔍</span>
       <input
@@ -18,14 +23,12 @@
         id="search-input"
         class="search-input"
         placeholder="Buscar por nombre o correo..."
-        oninput="handleSearch(event)"  autocomplete="off"/> <!-- Esta funcion recibe automaticamente el objeto que tiene la informacion sobre los usuarios -->
-
-        <!-- "autocomplete=off"  Es un atributo que le indica al navegador que no debe sugerir automaticamente datos previamente ingeresados-->
-
+        oninput="handleSearch(event)"
+        autocomplete="off"
+      />
       <div id="search-dropdown" class="search-dropdown"></div>
     </div>
 
-    <!-- Card del usuario -->
     <div class="card">
       <div class="wrapper">
         <div class="avatar-wrap" id="avatar-wrap"></div>
@@ -50,8 +53,7 @@
         </div>
       </div>
 
-      <!-- Botón debajo de los datos -->
-      <button class="reload-btn" id="btn" onclick="loadUser()"> <!-- Es un atributo que practicamente cuando el  usuario presiona y suelta el bton, se dispara la funcion "loadUser()"-->
+      <button class="reload-btn" id="btn" onclick="loadUser()">
         <span class="icon" id="icon">↻</span> Nuevo usuario
       </button>
     </div>
