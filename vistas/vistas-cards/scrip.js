@@ -1,3 +1,6 @@
+// Marca el link activo
+document.getElementById('nav-cards')?.classList.add('activo');
+
 /**
  * usuariosGaleria
  * Almacena los usuarios cargados en la sesión actual.
@@ -16,7 +19,6 @@ async function loadGaleria() {
   const grid     = document.getElementById('galeria-grid');
   const inputVal = parseInt(document.getElementById('cantidad-input').value);
 
-  // Valida que no supere 50 — si supera, SweetAlert y corta
   if (inputVal > 50) {
     Swal.fire({
       icon: 'error',
@@ -27,7 +29,6 @@ async function loadGaleria() {
     return;
   }
 
-  // Si el valor es inválido o menor a 1, usa 6 por defecto
   const cantidad = (!inputVal || inputVal < 1) ? 6 : inputVal;
 
   icon.classList.add('spinning');
@@ -38,9 +39,7 @@ async function loadGaleria() {
     const res  = await fetch(`https://randomuser.me/api/?results=${cantidad}`);
     const data = await res.json();
 
-    // Reemplaza el caché con los nuevos usuarios
     usuariosGaleria = data.results;
-
     renderGaleria(usuariosGaleria);
 
   } catch (e) {
@@ -104,7 +103,6 @@ function renderGaleria(usuarios) {
 /**
  * handleSearchGaleria
  * Filtra las cards por nombre o correo sobre el caché actual.
- * No hace nuevas peticiones a la API.
  * @param {Event} event - Evento del input de búsqueda
  */
 function handleSearchGaleria(event) {
@@ -123,5 +121,5 @@ function handleSearchGaleria(event) {
   renderGaleria(filtrados);
 }
 
-// Carga 6 usuarios al abrir la página
+// Carga inicial
 loadGaleria();
