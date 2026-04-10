@@ -5,24 +5,26 @@ let currentUser = null;
 document.getElementById('nav-principal')?.classList.add('activo');
 
 async function loadUser() {
-  const btn = document.getElementById('btn');
+  const btn  = document.getElementById('btn');
   const icon = document.getElementById('icon');
 
   icon.classList.add('spinning');
   btn.disabled = true;
 
   try {
-    const res = await fetch('https://randomuser.me/api/?results=1');
+    // Llama al backend propio en vez de randomuser.me directamente
+    const res  = await fetch('https://localhost:7299/api/usuarios?cantidad=1');
     const data = await res.json();
-    const u = data.results[0];
+
+    // El backend devuelve el array directo, sin "results"
+    const u = data[0];
 
     const user = {
-      fullName: `${u.name.first} ${u.name.last}`,
-      gender: u.gender,
-      city: u.location.city,
-      email: u.email,
-      phone: u.cell,
-      photo: u.picture.large,
+      fullName: u.nombre,
+      gender:   u.genero,
+      city:     u.ciudad,
+      email:    u.correo,
+      phone:    u.celular,
     };
 
     userHistory.push(user);
@@ -52,16 +54,18 @@ function displayUser(user) {
     badge.className = 'badge badge-female';
   }
 
-  document.getElementById('city').textContent = user.city;
+  document.getElementById('city').textContent  = user.city;
   document.getElementById('email').textContent = user.email;
   document.getElementById('phone').textContent = user.phone;
 
+  // Sin foto — se muestran las iniciales del usuario
+  const iniciales = `${user.fullName.split(' ')[0][0]}${user.fullName.split(' ')[1][0]}`;
   const wrap = document.getElementById('avatar-wrap');
-  wrap.innerHTML = `<img class="avatar" src="${user.photo}" alt="Foto de ${user.fullName}" />`;
+  wrap.innerHTML = `<div class="avatar-iniciales">${iniciales}</div>`;
 }
 
 function handleSearch(e) {
-  const query = e.target.value.trim().toLowerCase();
+  const query    = e.target.value.trim().toLowerCase();
   const dropdown = document.getElementById('search-dropdown');
 
   if (!query) {
@@ -83,7 +87,9 @@ function handleSearch(e) {
 
   dropdown.innerHTML = results.map((u) => `
     <div class="search-item" onclick="selectUser(${userHistory.indexOf(u)})">
-      <img src="${u.photo}" alt="${u.fullName}" class="search-avatar" />
+      <div class="search-avatar-iniciales">
+        ${u.fullName.split(' ')[0][0]}${u.fullName.split(' ')[1][0]}
+      </div>
       <div class="search-info">
         <span class="search-name">${u.fullName}</span>
         <span class="search-email">${u.email}</span>
@@ -100,7 +106,7 @@ function selectUser(index) {
 }
 
 function clearSearch() {
-  const input = document.getElementById('search-input');
+  const input    = document.getElementById('search-input');
   const dropdown = document.getElementById('search-dropdown');
   if (input) input.value = '';
   if (dropdown) {

@@ -11,7 +11,7 @@ let usuariosGaleria = [];
 /**
  * loadGaleria
  * Lee la cantidad del input, valida que no supere 50,
- * consume la API y renderiza las cards en el grid.
+ * consume el backend y renderiza las cards en el grid.
  */
 async function loadGaleria() {
   const btn      = document.getElementById('btn-galeria');
@@ -36,10 +36,13 @@ async function loadGaleria() {
   grid.innerHTML = '';
 
   try {
-    const res  = await fetch(`https://randomuser.me/api/?results=${cantidad}`);
+    // Llama al backend propio en vez de randomuser.me directamente
+    const res  = await fetch(`https://localhost:7299/api/usuarios?cantidad=${cantidad}`);
     const data = await res.json();
 
-    usuariosGaleria = data.results;
+    // El backend devuelve el array directo, sin "results"
+    usuariosGaleria = data;
+
     renderGaleria(usuariosGaleria);
 
   } catch (e) {
@@ -66,15 +69,19 @@ function renderGaleria(usuarios) {
   }
 
   usuarios.forEach(u => {
-    const fullName    = `${u.name.first} ${u.name.last}`;
-    const genderClass = u.gender === 'male' ? 'badge-male' : 'badge-female';
-    const genderText  = u.gender === 'male' ? 'Masculino' : 'Femenino';
+    // El backend ya devuelve los campos en español
+    const fullName    = u.nombre;
+    const genderClass = u.genero === 'male' ? 'badge-male' : 'badge-female';
+    const genderText  = u.genero === 'male' ? 'Masculino' : 'Femenino';
+
+    // Iniciales para el avatar ya que el backend no devuelve foto
+    const iniciales = `${fullName.split(' ')[0][0]}${fullName.split(' ')[1][0]}`;
 
     const card = document.createElement('div');
     card.className = 'galeria-card';
     card.innerHTML = `
       <div class="avatar-wrap">
-        <img class="avatar" src="${u.picture.large}" alt="Foto de ${fullName}" />
+        <div class="avatar-iniciales">${iniciales}</div>
       </div>
       <div class="header-info">
         <p class="name">${fullName}</p>
@@ -83,15 +90,15 @@ function renderGaleria(usuarios) {
       <div class="fields">
         <div class="row">
           <span class="label">Ciudad</span>
-          <span class="value">${u.location.city}</span>
+          <span class="value">${u.ciudad}</span>
         </div>
         <div class="row">
           <span class="label">Correo</span>
-          <span class="value">${u.email}</span>
+          <span class="value">${u.correo}</span>
         </div>
         <div class="row">
           <span class="label">Celular</span>
-          <span class="value">${u.cell}</span>
+          <span class="value">${u.celular}</span>
         </div>
       </div>
     `;
@@ -114,8 +121,8 @@ function handleSearchGaleria(event) {
   }
 
   const filtrados = usuariosGaleria.filter(u =>
-    `${u.name.first} ${u.name.last}`.toLowerCase().includes(query) ||
-    u.email.toLowerCase().includes(query)
+    u.nombre.toLowerCase().includes(query) ||
+    u.correo.toLowerCase().includes(query)
   );
 
   renderGaleria(filtrados);

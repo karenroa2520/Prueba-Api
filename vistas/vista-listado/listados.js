@@ -11,7 +11,7 @@ let usuariosListado = [];
 /**
  * loadListado
  * Lee la cantidad del input, valida que no supere 200,
- * consume la API y renderiza las filas en la tabla.
+ * consume el backend y renderiza las filas en la tabla.
  */
 async function loadListado() {
   const btn      = document.getElementById('btn-listado');
@@ -33,17 +33,20 @@ async function loadListado() {
 
   icon.classList.add('spinning');
   btn.disabled = true;
-  tbody.innerHTML = '<tr><td colspan="6" class="listado-empty">Cargando...</td></tr>';
+  tbody.innerHTML = '<tr><td colspan="5" class="listado-empty">Cargando...</td></tr>';
 
   try {
-    const res  = await fetch(`https://randomuser.me/api/?results=${cantidad}`);
+    // Llama al backend propio en vez de randomuser.me directamente
+    const res  = await fetch(`https://localhost:7299/api/usuarios?cantidad=${cantidad}`);
     const data = await res.json();
 
-    usuariosListado = data.results;
+    // El backend devuelve el array directo, sin "results"
+    usuariosListado = data;
+
     renderListado(usuariosListado);
 
   } catch (e) {
-    tbody.innerHTML = '<tr><td colspan="6" class="listado-empty">Error al cargar usuarios.</td></tr>';
+    tbody.innerHTML = '<tr><td colspan="5" class="listado-empty">Error al cargar usuarios.</td></tr>';
     console.error('Error al consumir la API:', e);
   }
 
@@ -61,23 +64,25 @@ function renderListado(usuarios) {
   tbody.innerHTML = '';
 
   if (usuarios.length === 0) {
-    tbody.innerHTML = '<tr><td colspan="6" class="listado-empty">Sin resultados.</td></tr>';
+    tbody.innerHTML = '<tr><td colspan="5" class="listado-empty">Sin resultados.</td></tr>';
     return;
   }
 
   usuarios.forEach(u => {
-    const fullName    = `${u.name.first} ${u.name.last}`;
-    const genderClass = u.gender === 'male' ? 'badge-male' : 'badge-female';
-    const genderText  = u.gender === 'male' ? 'Masculino' : 'Femenino';
+    const genderClass = u.genero === 'male' ? 'badge-male' : 'badge-female';
+    const genderText  = u.genero === 'male' ? 'Masculino' : 'Femenino';
+
+    // Iniciales para el avatar ya que el backend no devuelve foto
+    const iniciales = `${u.nombre.split(' ')[0][0]}${u.nombre.split(' ')[1][0]}`;
 
     const tr = document.createElement('tr');
     tr.innerHTML = `
-      <td><img class="listado-avatar" src="${u.picture.medium}" alt="Foto de ${fullName}" /></td>
-      <td class="listado-name">${fullName}</td>
+      <td><div class="listado-avatar-iniciales">${iniciales}</div></td>
+      <td class="listado-name">${u.nombre}</td>
       <td><span class="badge ${genderClass}">${genderText}</span></td>
-      <td>${u.location.city}</td>
-      <td>${u.email}</td>
-      <td>${u.cell}</td>
+      <td>${u.ciudad}</td>
+      <td>${u.correo}</td>
+      <td>${u.celular}</td>
     `;
 
     tbody.appendChild(tr);
@@ -98,8 +103,8 @@ function handleSearchListado(event) {
   }
 
   const filtrados = usuariosListado.filter(u =>
-    `${u.name.first} ${u.name.last}`.toLowerCase().includes(query) ||
-    u.email.toLowerCase().includes(query)
+    u.nombre.toLowerCase().includes(query) ||
+    u.correo.toLowerCase().includes(query)
   );
 
   renderListado(filtrados);
