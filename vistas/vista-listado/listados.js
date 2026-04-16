@@ -1,18 +1,8 @@
-// Marca el link activo
 document.getElementById('nav-listado')?.classList.add('activo');
 
-/**
- * usuariosListado
- * Almacena los usuarios cargados en la sesión actual del listado.
- * Se reemplaza completo con cada nueva carga.
- */
 let usuariosListado = [];
+let allUsers = [];
 
-/**
- * loadListado
- * Lee la cantidad del input, valida que no supere 200,
- * consume el backend y renderiza las filas en la tabla.
- */
 async function loadListado() {
   const btn      = document.getElementById('btn-listado');
   const icon     = document.getElementById('icon-listado');
@@ -36,29 +26,27 @@ async function loadListado() {
   tbody.innerHTML = '<tr><td colspan="5" class="listado-empty">Cargando...</td></tr>';
 
   try {
-    // Llama al backend propio en vez de randomuser.me directamente
-    const res  = await fetch(`https://localhost:7299/api/usuarios?cantidad=${cantidad}`);
-    const data = await res.json();
+    // Solo llama la API una vez
+    if (allUsers.length === 0) {
+      const res = await fetch("https://localhost:7299/api/usuarios");
+      allUsers = await res.json();
+    }
 
-    // El backend devuelve el array directo, sin "results"
-    usuariosListado = data;
+    // Selecciona 'cantidad' usuarios aleatorios sin repetir
+    const shuffled = [...allUsers].sort(() => Math.random() - 0.5);
+    usuariosListado = shuffled.slice(0, cantidad);
 
     renderListado(usuariosListado);
 
   } catch (e) {
     tbody.innerHTML = '<tr><td colspan="5" class="listado-empty">Error al cargar usuarios.</td></tr>';
-    console.error('Error al consumir la API:', e);
+    console.error('Error:', e);
   }
 
   icon.classList.remove('spinning');
   btn.disabled = false;
 }
 
-/**
- * renderListado
- * Construye y renderiza las filas de la tabla.
- * @param {Array} usuarios - Lista de usuarios a renderizar
- */
 function renderListado(usuarios) {
   const tbody = document.getElementById('listado-body');
   tbody.innerHTML = '';
@@ -69,31 +57,24 @@ function renderListado(usuarios) {
   }
 
   usuarios.forEach(u => {
-    const genderClass = u.genero === 'male' ? 'badge-male' : 'badge-female';
-    const genderText  = u.genero === 'male' ? 'Masculino' : 'Femenino';
-
-    // Iniciales para el avatar ya que el backend no devuelve foto
-    const iniciales = `${u.nombre.split(' ')[0][0]}${u.nombre.split(' ')[1][0]}`;
+    const fullName  = `${u.primerNombre ?? ''} ${u.primerApellido ?? ''}`.trim();
+    const partes    = fullName.split(/\s+/);
+    const iniciales = partes.length >= 2
+      ? `${partes[0][0]}${partes[1][0]}`
+      : partes[0]?.[0] ?? '?';
 
     const tr = document.createElement('tr');
     tr.innerHTML = `
-      <td><div class="listado-avatar-iniciales">${iniciales}</div></td>
-      <td class="listado-name">${u.nombre}</td>
-      <td><span class="badge ${genderClass}">${genderText}</span></td>
-      <td>${u.ciudad}</td>
-      <td>${u.correo}</td>
-      <td>${u.celular}</td>
+      <td><div class="listado-avatar-iniciales">${iniciales.toUpperCase()}</div></td>
+      <td class="listado-name">${fullName}</td>
+      <td>${u.direccion ?? 'Sin dirección'}</td>
+      <td>${u.email ?? 'Sin correo'}</td>
+      <td>${u.telefono1 ?? 'Sin teléfono'}</td>
     `;
-
     tbody.appendChild(tr);
   });
 }
 
-/**
- * handleSearchListado
- * Filtra las filas por nombre o correo sobre el caché actual.
- * @param {Event} event - Evento del input de búsqueda
- */
 function handleSearchListado(event) {
   const query = event.target.value.toLowerCase().trim();
 
@@ -102,13 +83,12 @@ function handleSearchListado(event) {
     return;
   }
 
-  const filtrados = usuariosListado.filter(u =>
-    u.nombre.toLowerCase().includes(query) ||
-    u.correo.toLowerCase().includes(query)
-  );
+  const filtrados = usuariosListado.filter(u => {
+    const fullName = `${u.primerNombre ?? ''} ${u.primerApellido ?? ''}`.toLowerCase();
+    return fullName.includes(query) || (u.email ?? '').toLowerCase().includes(query);
+  });
 
   renderListado(filtrados);
 }
 
-// Carga inicial
 loadListado();

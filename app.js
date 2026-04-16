@@ -1,7 +1,7 @@
 let userHistory = [];
 let currentUser = null;
+let allUsers = []; // guardamos todos los usuarios cargados
 
-// Marca el link activo
 document.getElementById('nav-principal')?.classList.add('activo');
 
 async function loadUser() {
@@ -12,19 +12,20 @@ async function loadUser() {
   btn.disabled = true;
 
   try {
-    // Llama al backend propio en vez de randomuser.me directamente
-    const res  = await fetch('https://localhost:7299/api/usuarios?cantidad=1');
-    const data = await res.json();
+    // Solo llamamos la API una vez y guardamos todos los usuarios
+    if (allUsers.length === 0) {
+      const res  = await fetch("https://localhost:7299/api/usuarios");
+      allUsers = await res.json();
+    }
 
-    // El backend devuelve el array directo, sin "results"
-    const u = data[0];
+    // Elegimos uno aleatorio
+    const u = allUsers[Math.floor(Math.random() * allUsers.length)];
 
     const user = {
-      fullName: u.nombre,
-      gender:   u.genero,
-      city:     u.ciudad,
-      email:    u.correo,
-      phone:    u.celular,
+      fullName: `${u.primerNombre ?? ''} ${u.primerApellido ?? ''}`.trim(),
+      city:     u.direccion  ?? 'Sin dirección',
+      email:    u.email      ?? 'Sin correo',
+      phone:    u.telefono1  ?? 'Sin teléfono',
     };
 
     userHistory.push(user);
@@ -46,22 +47,20 @@ function displayUser(user) {
   document.getElementById('name').textContent = user.fullName;
 
   const badge = document.getElementById('gender-badge');
-  if (user.gender === 'male') {
-    badge.textContent = 'Masculino';
-    badge.className = 'badge badge-male';
-  } else {
-    badge.textContent = 'Femenino';
-    badge.className = 'badge badge-female';
-  }
+  if (badge) badge.style.display = 'none';
 
   document.getElementById('city').textContent  = user.city;
   document.getElementById('email').textContent = user.email;
   document.getElementById('phone').textContent = user.phone;
 
-  // Sin foto — se muestran las iniciales del usuario
-  const iniciales = `${user.fullName.split(' ')[0][0]}${user.fullName.split(' ')[1][0]}`;
+  // Iniciales con split por espacios múltiples
+  const partes = user.fullName.trim().split(/\s+/);
+  const iniciales = partes.length >= 2
+    ? `${partes[0][0]}${partes[1][0]}`
+    : partes[0]?.[0] ?? '?';
+
   const wrap = document.getElementById('avatar-wrap');
-  wrap.innerHTML = `<div class="avatar-iniciales">${iniciales}</div>`;
+  wrap.innerHTML = `<div class="avatar-iniciales">${iniciales.toUpperCase()}</div>`;
 }
 
 function handleSearch(e) {
@@ -85,17 +84,22 @@ function handleSearch(e) {
     return;
   }
 
-  dropdown.innerHTML = results.map((u) => `
-    <div class="search-item" onclick="selectUser(${userHistory.indexOf(u)})">
-      <div class="search-avatar-iniciales">
-        ${u.fullName.split(' ')[0][0]}${u.fullName.split(' ')[1][0]}
+  dropdown.innerHTML = results.map((u) => {
+    const partes = u.fullName.trim().split(/\s+/);
+    const iniciales = partes.length >= 2
+      ? `${partes[0][0]}${partes[1][0]}`
+      : partes[0]?.[0] ?? '?';
+
+    return `
+      <div class="search-item" onclick="selectUser(${userHistory.indexOf(u)})">
+        <div class="search-avatar-iniciales">${iniciales.toUpperCase()}</div>
+        <div class="search-info">
+          <span class="search-name">${u.fullName}</span>
+          <span class="search-email">${u.email}</span>
+        </div>
       </div>
-      <div class="search-info">
-        <span class="search-name">${u.fullName}</span>
-        <span class="search-email">${u.email}</span>
-      </div>
-    </div>
-  `).join('');
+    `;
+  }).join('');
 
   dropdown.classList.add('visible');
 }
