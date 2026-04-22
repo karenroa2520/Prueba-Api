@@ -34,13 +34,14 @@
         <div class="avatar-wrap" id="avatar-wrap"></div>
         <div class="header-info">
           <p class="name" id="name">Cargando...</p>
+          <span id="id-badge" class="id-badge"></span>
           <span class="badge" id="gender-badge"></span>
         </div>
       </div>
 
       <div class="fields">
         <div class="row">
-          <span class="label">Direccion</span>
+          <span class="label">Dirección</span>
           <span class="value" id="city"></span>
         </div>
         <div class="row">
@@ -53,9 +54,16 @@
         </div>
       </div>
 
-      <button class="reload-btn" id="btn" onclick="loadUser()">
-        <span class="icon" id="icon">↻</span> Nuevo usuario
-      </button>
+      <!-- Botones -->
+      <div class="btn-group">
+        <button class="reload-btn btn-secondary" id="btn" onclick="loadUser()">
+          <span class="icon" id="icon">↻</span> Nuevo usuario
+        </button>
+        <button class="reload-btn btn-primary" id="btn-detalle" onclick="verDetalle()">
+          👁 Ver detalles
+        </button>
+      </div>
+
     </div>
 
   </div>

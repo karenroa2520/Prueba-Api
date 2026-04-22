@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Detalle de Usuario</title>
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="/vistas/vista-detalle/detalle.css" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <div class="detalle-wrapper">
+
+    <nav class="nav-vistas">
+      <a href="/index.html" class="nav-link" id="nav-principal">👤 Principal</a>
+      <a href="/vistas/vistas-cards/index.html" class="nav-link" id="nav-cards">⊞ Cards</a>
+      <a href="/vistas/vista-listado/vista-listado.html" class="nav-link" id="nav-listado">☰ Listado</a>
+    </nav>
+
+    <button class="btn-back" onclick="history.back()">← Volver</button>
+
+    <div id="estado-carga" class="estado-carga">
+      <div class="spinner"></div>
+      <p>Cargando información...</p>
+    </div>
+
+    <div id="estado-error" class="estado-error" style="display:none;">
+      <span class="error-icon">⚠️</span>
+      <p id="error-msg">No se pudo cargar el usuario.</p>
+      <button class="btn-back" onclick="history.back()">← Regresar</button>
+    </div>
+
+    <div id="detalle-card" class="detalle-card" style="display:none;">
+
+      <div class="detalle-header">
+        <div class="avatar-xl" id="det-avatar"></div>
+        <div class="detalle-header-info">
+          <h1 id="det-nombre"></h1>
+          <span class="det-id-badge" id="det-id"></span>
+        </div>
+      </div>
+
+      <div class="det-divider"></div>
+
+      <div class="det-grid">
+        <div class="det-field">
+          <span class="det-label">Identificación</span>
+          <span class="det-value mono" id="det-identificacion"></span>
+        </div>
+        <div class="det-field">
+          <span class="det-label">Nombre completo</span>
+          <span class="det-value" id="det-nombre-completo"></span>
+        </div>
+        <div class="det-field">
+          <span class="det-label">Dirección</span>
+          <span class="det-value" id="det-direccion"></span>
+        </div>
+        <div class="det-field">
+          <span class="det-label">Correo electrónico</span>
+          <span class="det-value" id="det-email"></span>
+        </div>
+        <div class="det-field">
+          <span class="det-label">Teléfono 1</span>
+          <span class="det-value mono" id="det-telefono1"></span>
+        </div>
+        <div class="det-field">
+          <span class="det-label">Teléfono 2</span>
+          <span class="det-value mono" id="det-telefono2"></span>
+        </div>
+        <div class="det-field">
+          <span class="det-label">País</span>
+          <span class="det-value" id="det-pais"></span>
+        </div>
+        <div class="det-field">
+          <span class="det-label">Departamento</span>
+          <span class="det-value" id="det-departamento"></span>
+        </div>
+        <div class="det-field">
+          <span class="det-label">Ciudad</span>
+          <span class="det-value" id="det-ciudad"></span>
+        </div>
+        <div class="det-field">
+          <span class="det-label">Barrio</span>
+          <span class="det-value" id="det-barrio"></span>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <script src="/vistas/vista-detalle/detalle.js"></script>
+</body>
+</html>

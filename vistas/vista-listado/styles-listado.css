@@ -1,8 +1,5 @@
-.listado-container {
-  max-width: 1100px;
-}
+.listado-container { max-width: 1140px; }
 
-/* Reutiliza galeria-controls del styles.css base */
 .galeria-controls {
   display: flex;
   align-items: center;
@@ -10,9 +7,7 @@
   width: 100%;
 }
 
-.galeria-controls .search-container {
-  flex: 1;
-}
+.galeria-controls .search-container { flex: 1; }
 
 .cantidad-wrap {
   display: flex;
@@ -23,84 +18,74 @@
 }
 
 .cantidad-label {
-  font-size: 11px;
-  color: #888;
-  font-weight: 500;
+  font-size: 10px;
+  color: #9ca3af;
+  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.06em;
 }
 
 .cantidad-input {
-  border: 2px solid #e0e0e0;
+  border: 1.5px solid #e5e7eb;
   border-radius: 10px;
-  padding: 10px 14px;
+  padding: 10px 12px;
   font-size: 15px;
   font-family: inherit;
-  font-weight: 500;
+  font-weight: 600;
   background: #fff;
   color: #1a1a1a;
   outline: none;
-  transition: border-color 0.2s;
+  transition: border-color 0.2s, box-shadow 0.2s;
   text-align: center;
-  width: 70px;
+  width: 72px;
 }
 
 .cantidad-input:focus {
-  border-color: #4a90e2;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99,102,241,0.1);
 }
 
-/* Contenedor con scroll horizontal si fuera necesario */
 .listado-wrap {
   width: 100%;
   overflow-x: auto;
   border-radius: 16px;
-  border: 1px solid rgba(0,0,0,0.08);
-  box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+  border: 1px solid rgba(0,0,0,0.07);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.05);
 }
 
-/* Tabla */
 .listado-table {
   width: 100%;
   border-collapse: collapse;
   background: #fff;
-  border-radius: 16px;
-  overflow: hidden;
   font-size: 14px;
 }
 
-/* Encabezados */
 .listado-table thead tr {
-  background: #f8f8f6;
-  border-bottom: 1px solid rgba(0,0,0,0.08);
+  background: #f9fafb;
+  border-bottom: 1.5px solid rgba(0,0,0,0.07);
 }
 
 .listado-table th {
-  padding: 14px 16px;
+  padding: 13px 16px;
   text-align: left;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 600;
-  color: #888;
+  color: #9ca3af;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.06em;
   white-space: nowrap;
 }
 
-/* Filas */
 .listado-table tbody tr {
-  border-bottom: 1px solid rgba(0,0,0,0.05);
-  transition: background 0.15s;
+  border-bottom: 1px solid rgba(0,0,0,0.04);
+  transition: background 0.12s;
 }
 
-.listado-table tbody tr:last-child {
-  border-bottom: none;
-}
-
-.listado-table tbody tr:hover {
-  background: #f8f8f6;
-}
+.listado-table tbody tr:last-child { border-bottom: none; }
+.listado-table tbody tr:hover { background: #f9fafb; }
 
 .listado-table td {
-  padding: 12px 16px;
+  padding: 11px 16px;
   color: #1a1a1a;
   vertical-align: middle;
   max-width: 200px;
@@ -109,27 +94,12 @@
   text-overflow: ellipsis;
 }
 
-/* Foto en la tabla */
-.listado-avatar {
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 1px solid rgba(0,0,0,0.08);
-}
+.listado-name { font-weight: 600; font-size: 14px; color: #1a1a1a; }
+.listado-id { font-size: 12px; color: #6b7280; font-weight: 500; }
 
-/* Nombre */
-.listado-name {
-  font-weight: 600;
-  color: #1a1a1a;
-}
-
-/* Badge género — reutiliza .badge, .badge-male, .badge-female del styles.css */
-
-/* Sin resultados */
 .listado-empty {
   text-align: center;
-  color: #aaa;
-  padding: 32px;
+  color: #9ca3af;
+  padding: 40px;
   font-size: 14px;
 }
